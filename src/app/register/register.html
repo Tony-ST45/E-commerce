@@ -1,0 +1,164 @@
+<div class="min-h-screen bg-white font-sans antialiased flex flex-row-reverse selection:bg-black selection:text-white">
+
+  <!-- Right Side: Immersive Brand Story -->
+  <div class="hidden lg:block w-[45%] relative overflow-hidden">
+    <img 
+      src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1920&auto=format&fit=crop"
+      class="absolute inset-0 w-full h-full object-cover transition-transform duration-[10s] hover:scale-105"
+      alt="Signup Background"
+    />
+    
+    <!-- Sophisticated Overlay & Glassmorphism -->
+    <div class="absolute inset-0 bg-zinc-950/30 backdrop-brightness-75"></div>
+
+    <div class="absolute inset-0 flex flex-col items-center justify-center z-10 px-16 text-center">
+      <div class="backdrop-blur-md bg-white/10 border border-white/20 p-12 rounded-sm max-w-sm">
+        <h2 class="text-5xl font-serif italic text-white mb-8 leading-tight">The Inner Circle</h2>
+        
+        <div class="space-y-6 text-white/90 tracking-[0.25em] uppercase text-[10px] font-medium">
+          <p class="flex items-center justify-center gap-3">
+            <span class="w-1 h-1 bg-white rounded-full"></span> Priority Access
+          </p>
+          <p class="flex items-center justify-center gap-3">
+            <span class="w-1 h-1 bg-white rounded-full"></span> Seasonal Lookbooks
+          </p>
+          <p class="flex items-center justify-center gap-3">
+            <span class="w-1 h-1 bg-white rounded-full"></span> Global Concierge
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Left Side: Registration Interface -->
+  <div class="w-full lg:w-[55%] flex flex-col justify-center bg-white overflow-y-auto">
+
+    <div class="py-16 max-w-115 w-full mx-auto px-8 lg:px-12">
+
+      <header class="mb-14">
+        <div class="mb-8">
+          <span class="text-xl font-bold tracking-tighter uppercase border-b-2 border-black pb-1">The Edit</span>
+        </div>
+        <h1 class="text-4xl font-serif text-zinc-900 mb-2">Create Account</h1>
+        <p class="text-zinc-500 font-medium">Begin your journey with curated excellence.</p>
+      </header>
+
+      <!-- Refined Form -->
+      <form (ngSubmit)="register()" #signupForm="ngForm" class="space-y-8">
+
+        <!-- Name Grid -->
+        <div class="grid grid-cols-2 gap-8">
+          <div class="group relative">
+            <label class="block text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-400 mb-1 group-focus-within:text-black transition-colors">
+              First Name
+            </label>
+            <input
+              type="text"
+              name="firstName"
+              [(ngModel)]="firstName"
+              required
+              class="w-full border-b border-zinc-200 py-2 focus:border-black outline-none transition-all duration-500 placeholder:text-zinc-200"
+              placeholder="Julian"
+            >
+          </div>
+
+          <div class="group relative">
+            <label class="block text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-400 mb-1 group-focus-within:text-black transition-colors">
+              Last Name
+            </label>
+            <input
+              type="text"
+              name="lastName"
+              [(ngModel)]="lastName"
+              required
+              class="w-full border-b border-zinc-200 py-2 focus:border-black outline-none transition-all duration-500 placeholder:text-zinc-200"
+              placeholder="Vance"
+            >
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="group relative">
+          <label class="block text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-400 mb-1 group-focus-within:text-black transition-colors">
+            Email Address
+          </label>
+          <input
+            type="email"
+            name="email"
+            [(ngModel)]="email"
+            required
+            class="w-full border-b border-zinc-200 py-2 focus:border-black outline-none transition-all duration-500 placeholder:text-zinc-200"
+            placeholder="studio@vance.com"
+          >
+        </div>
+
+        <!-- Password -->
+        <div class="group relative">
+          <label class="block text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-400 mb-1 group-focus-within:text-black transition-colors">
+            Password
+          </label>
+          <input
+            type="password"
+            name="password"
+            [(ngModel)]="password"
+            required
+            minlength="8"
+            class="w-full border-b border-zinc-200 py-2 focus:border-black outline-none transition-all duration-500 placeholder:text-zinc-200"
+            placeholder="••••••••••••"
+          >
+          <p class="text-[9px] uppercase tracking-widest text-zinc-400 mt-3 italic">
+            Minimum eight characters required
+          </p>
+        </div>
+
+        <!-- Terms -->
+        <div class="flex items-start gap-4 pt-2">
+          <input
+            type="checkbox"
+            name="terms"
+            [(ngModel)]="terms"
+            required
+            class="mt-1 w-4 h-4 rounded border-zinc-300 text-black focus:ring-black accent-black transition-all"
+          >
+          <label class="text-[11px] text-zinc-500 leading-relaxed">
+            I acknowledge the 
+            <a class="text-black font-bold cursor-pointer hover:underline underline-offset-4">Terms of Service</a>
+            and the 
+            <a class="text-black font-bold cursor-pointer hover:underline underline-offset-4">Privacy Policy</a>.
+          </label>
+        </div>
+
+        <!-- Submit -->
+        <div class="pt-6">
+          <button
+            type="submit"
+            class="w-full bg-zinc-900 text-white py-5 rounded-sm font-bold uppercase tracking-[0.3em] text-[11px] hover:bg-black transition-all shadow-[0_15px_30px_-10px_rgba(0,0,0,0.2)] active:scale-[0.98]"
+          >
+            Create Profile
+          </button>
+        </div>
+
+      </form>
+
+      <!-- Footer Action -->
+      <div class="mt-16 text-center border-t border-zinc-100 pt-10">
+        <p class="text-xs tracking-wide text-zinc-500">
+          Already have a profile? 
+          <a routerLink="/login" class="text-black font-bold uppercase ml-3 hover:underline underline-offset-4 transition-all">
+            Log In
+          </a>
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Minimal Legal Footer -->
+    <footer class="mt-auto p-12 flex gap-8 text-[9px] uppercase tracking-[0.3em] text-zinc-300 justify-center lg:justify-start">
+      <span>&copy; 2026 THE EDIT LTD</span>
+      <a class="hover:text-black transition-colors">Support</a>
+      <a class="hover:text-black transition-colors">Locations</a>
+    </footer>
+
+  </div>
+
+</div>

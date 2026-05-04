@@ -1,0 +1,213 @@
+  <header class="relative pt-10 pb-10 overflow-hidden">
+    <!-- Abstract Background Elements -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10">
+      <div class="absolute top-10 left-10 w-72 h-72 bg-indigo-200/40 rounded-full blur-[100px] animate-pulse"></div>
+      <div class="absolute bottom-20 right-10 w-96 h-96 bg-fuchsia-200/30 rounded-full blur-[120px]"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-16 items-center">
+      <div class="lg:col-span-7 space-y-8">
+        <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+          </span>
+          <span class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">Drop 004 / 2026</span>
+        </div>
+
+        <h1 class="text-5xl md:text-6xl font-black tracking-tighter leading-[0.85] text-slate-900">
+          Refine Your <br/>
+          <span class="serif text-indigo-600">Standard.</span>
+        </h1>
+
+        <p class="text-xl text-slate-500 max-w-md leading-relaxed font-medium">
+          A collection of elevated essentials designed for those who value utility and aesthetic precision.
+        </p>
+
+        <div class="flex flex-wrap gap-4">
+          <a routerLink="/products"
+   class="group px-10 py-5 bg-slate-900 text-white rounded-2xl font-bold flex items-center gap-3 hover:bg-indigo-600 transition-all shadow-2xl shadow-slate-200">
+
+  Shop Collection
+
+  <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform"
+       fill="none"
+       stroke="currentColor"
+       viewBox="0 0 24 24">
+    <path stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+  </svg>
+
+</a>
+          <a routerLink="/lookbook"
+   class="px-10 py-5 bg-white border border-slate-200 text-slate-900 rounded-2xl font-bold hover:bg-slate-50 transition inline-block">
+
+  Lookbook
+
+</a>
+        </div>
+      </div>
+
+      <!-- IMAGE SLIDER CARD -->
+      <div class="lg:col-span-5 relative">
+        <div class="absolute -inset-4 bg-gradient-to-tr from-indigo-100 to-fuchsia-100 rounded-[3rem] -rotate-2 -z-10"></div>
+        <div class="relative aspect-4/5 bg-slate-200 rounded-[2.5rem] overflow-hidden shadow-2xl group" 
+             (mouseenter)="pauseSlider()" (mouseleave)="resumeSlider()">
+          
+          <img *ngFor="let img of images; let i = index" [src]="img" 
+               [class.opacity-100]="i === currentImageIndex" [class.opacity-0]="i !== currentImageIndex"
+               class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out">
+          
+          <!-- Slider UI -->
+          <div class="absolute bottom-8 left-8 right-8 p-6 glass rounded-3xl flex justify-between items-center">
+            <div>
+              <p class="text-[10px] font-black uppercase tracking-widest text-indigo-600 mb-1">Featured</p>
+              <h4 class="font-bold text-lg">Linear Desk Lamp</h4>
+            </div>
+            <div class="flex gap-2">
+              <button (click)="prevSlide()" class="w-10 h-10 flex items-center justify-center bg-white/50 hover:bg-white rounded-full transition shadow-sm">‹</button>
+              <button (click)="nextSlide()" class="w-10 h-10 flex items-center justify-center bg-white/50 hover:bg-white rounded-full transition shadow-sm">›</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- BENTO CATEGORY GRID -->
+  <section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex justify-between items-end mb-12">
+        <div>
+          <h2 class="text-4xl font-black tracking-tighter italic">The Core Series</h2>
+          <p class="text-slate-500 mt-2">Curated categories for the modern lifestyle.</p>
+        </div>
+        <a routerLink="/products" class="text-sm font-black uppercase tracking-widest text-indigo-600 border-b-2 border-indigo-100 hover:border-indigo-600 transition pb-1">Explore All</a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-6 md:h-700px">
+        <!-- Large Featured Box -->
+        <div class="md:col-span-2 md:row-span-2 bento-card relative rounded-[3rem] overflow-hidden bg-slate-100 group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d" class="w-full h-full object-cover group-hover:scale-105 transition duration-1000">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-12 flex flex-col justify-end text-white">
+            <h3 class="text-5xl font-black mb-4 leading-none">High <br/>Fashion</h3>
+            <p class="text-white/70 max-w-xs mb-6">Sustainable fabrics meets avant-garde tailoring.</p>
+            <a routerLink="/products"
+   class="w-fit px-8 py-3 bg-white text-black rounded-full font-black text-xs uppercase tracking-widest inline-block hover:bg-slate-100 transition">
+
+  Shop Category
+
+</a>
+          </div>
+        </div>
+
+        <!-- Tech Box -->
+        <div class="md:col-span-2 bento-card relative rounded-[3rem] overflow-hidden bg-indigo-50 group p-10 flex flex-col justify-between cursor-pointer">
+          <div class="relative z-10">
+            <h3 class="text-3xl font-black text-slate-900 leading-tight">Workspace <br/>Electronics</h3>
+            <p class="text-slate-500 mt-2">Precision tools for creators.</p>
+          </div>
+          <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f" class="absolute right-0 bottom-0 w-1/2 h-full object-contain mix-blend-multiply group-hover:scale-110 transition duration-700">
+        </div>
+
+        <!-- Lifestyle Box -->
+        <div class="md:col-span-1 bento-card bg-fuchsia-50 rounded-[3rem] p-10 flex flex-col justify-center items-center text-center group cursor-pointer">
+          <div class="w-16 h-16 bg-white rounded-2xl shadow-sm mb-4 flex items-center justify-center group-hover:rotate-12 transition">
+            <svg class="w-8 h-8 text-fuchsia-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" stroke-width="2"/></svg>
+          </div>
+          <h3 class="text-xl font-black">Lifestyle</h3>
+          <p class="text-sm text-slate-500 mt-1">Daily Rituals</p>
+        </div>
+
+        <!-- Dark CTA Box -->
+        <div class="md:col-span-1 bento-card bg-slate-900 rounded-[3rem] p-10 flex flex-col justify-between text-white group cursor-pointer relative overflow-hidden">
+          <div class="absolute -top-10 -right-10 w-32 h-32 bg-indigo-500/20 rounded-full blur-2xl"></div>
+          <div class="text-3xl font-black">20% <br/>OFF</div>
+          <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Member Exclusive</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODERN FOOTER -->
+  <footer class="bg-slate-900 text-white pt-24 pb-12 rounded-t-[4rem] relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-20 pb-20 border-b border-slate-800">
+        <div class="space-y-8">
+          <h2 class="text-5xl font-black tracking-tighter">Stay Inspired.</h2>
+          <p class="text-slate-400 text-lg max-w-md">Weekly drops, design inspiration, and exclusive offers straight to your inbox.</p>
+          <form (ngSubmit)="subscribe()" class="relative max-w-md group">
+            <input [(ngModel)]="subscriberEmail" name="email"
+                   class="w-full bg-slate-800/50 border border-slate-700 px-8 py-6 rounded-3xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all placeholder:text-slate-500"
+                   placeholder="Enter your email">
+            <button class="absolute right-3 top-3 bottom-3 px-8 bg-indigo-600 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-indigo-500 transition shadow-lg active:scale-95">
+              Subscribe
+            </button>
+          </form>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-12">
+          <div>
+            <h4 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-8">Navigation</h4>
+            <ul class="space-y-4 text-slate-300 font-bold text-sm">
+              <li><a class="hover:text-white transition cursor-pointer">Shop All</a></li>
+              <li><a class="hover:text-white transition cursor-pointer">Collections</a></li>
+              <li><a class="hover:text-white transition cursor-pointer">Sustainability</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-8">Company</h4>
+            <ul class="space-y-4 text-slate-300 font-bold text-sm">
+              <li><a class="hover:text-white transition cursor-pointer">About Us</a></li>
+              <li><a class="hover:text-white transition cursor-pointer">Careers</a></li>
+              <li><a class="hover:text-white transition cursor-pointer">Privacy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-12 flex flex-col md:flex-row justify-between items-center gap-8">
+        <div class="text-xl font-black tracking-tighter italic">CARTIFY.</div>
+        <p class="text-slate-500 text-[10px] font-black uppercase tracking-widest">© 2026 Designed for the Future</p>
+        <div class="flex gap-8">
+          <a class="text-slate-400 hover:text-white transition cursor-pointer text-xs font-bold uppercase tracking-widest">Instagram</a>
+          <a class="text-slate-400 hover:text-white transition cursor-pointer text-xs font-bold uppercase tracking-widest">Twitter</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- DYNAMIC TOAST -->
+<div *ngIf="showToast"
+     class="fixed bottom-10 right-10 z-100 min-w-[320px] 
+            bg-slate-900 text-white p-5 rounded-2xl shadow-2xl 
+            animate-in fade-in slide-in-from-right-10 duration-300">
+  
+  <div class="flex items-start gap-4">
+    <!-- Success Icon -->
+    <div class="shrink-0 w-10 h-10 bg-green-500/20 rounded-full flex items-center justify-center">
+      <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path d="M5 13l4 4L19 7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <!-- Content -->
+    <div class="flex-1">
+      <h3 class="font-bold text-sm tracking-tight">You're on the list!</h3>
+      <p class="text-slate-400 text-xs mt-1">Check your inbox for a welcome treat.</p>
+    </div>
+
+    <!-- Manual Close -->
+    <button (click)="showToast = false" class="text-slate-500 hover:text-white transition">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Progress Bar (Visual Timer) -->
+  <div class="absolute bottom-0 left-0 h-1 bg-indigo-500 rounded-b-2xl animate-shrink-width"></div>
+</div>
+

@@ -1,0 +1,173 @@
+<div class="min-h-screen bg-gray-50 py-10 px-6">
+
+  <div class="max-w-7xl mx-auto">
+
+    <!-- Page Title -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-extrabold text-gray-900">
+        Shopping Cart
+      </h1>
+
+      <p class="text-gray-500 mt-1">
+        {{ cart.length }} {{ cart.length === 1 ? 'Item' : 'Items' }} in your cart
+      </p>
+    </div>
+
+    <!-- Empty Cart -->
+    <div *ngIf="cart.length === 0"
+      class="bg-white rounded-2xl shadow-sm p-12 text-center">
+
+      <div class="text-5xl mb-4">🛒</div>
+
+      <h2 class="text-xl font-bold text-gray-800">
+        Your cart is empty
+      </h2>
+
+      <p class="text-gray-400 mt-2">
+        Looks like you haven't added anything yet.
+      </p>
+
+      <button
+        routerLink="/products"
+        class="mt-6 bg-black text-white px-6 py-3 rounded-lg hover:opacity-90 transition"
+      >
+        Continue Shopping
+      </button>
+
+    </div>
+
+    <!-- Cart Content -->
+    <div *ngIf="cart.length > 0"
+      class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+      <!-- Cart Items -->
+      <div class="lg:col-span-2 space-y-6">
+
+        <div *ngFor="let item of cart"
+          class="bg-white rounded-2xl shadow-sm p-6 flex gap-6">
+
+          <!-- Product Image -->
+          <div class="w-32 h-32 bg-gray-100 rounded-xl overflow-hidden">
+
+            <img
+  [src]="item.thumbnail || 'assets/placeholder.png'"
+  class="w-full h-full object-cover"
+/>
+
+          </div>
+
+          <!-- Product Info -->
+          <div class="flex-1 flex flex-col justify-between">
+
+            <div>
+
+              <h3 class="text-lg font-semibold text-gray-900">
+                {{ item.title }}
+              </h3>
+
+              <p class="text-gray-400 text-sm mt-1">
+                ₹{{ item.price }} per unit
+              </p>
+
+            </div>
+
+            <div class="flex justify-between items-center mt-4 flex-wrap gap-4">
+
+              <!-- Quantity -->
+              <div class="flex items-center border rounded-lg overflow-hidden">
+
+                <button
+                  (click)="decreaseQty(item)"
+                  [disabled]="item.quantity === 1"
+                  class="px-4 py-2 hover:bg-gray-100 transition disabled:opacity-40"
+                >
+                  −
+                </button>
+
+                <span class="px-5 font-semibold">
+                  {{ item.quantity }}
+                </span>
+
+                <button
+                  (click)="increaseQty(item)"
+                  class="px-4 py-2 hover:bg-gray-100 transition"
+                >
+                  +
+                </button>
+
+              </div>
+
+              <!-- Price -->
+              <div class="text-lg font-bold text-gray-900">
+                ₹{{ item.price * item.quantity }}
+              </div>
+
+              <!-- Remove -->
+              <button
+                (click)="removeFromCart(item)"
+                class="text-red-500 text-sm hover:underline"
+              >
+                Remove
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Order Summary -->
+      <div class="bg-white rounded-2xl shadow-sm p-6 h-fit sticky top-24">
+
+        <h2 class="text-xl font-bold text-gray-900 mb-6">
+          Order Summary
+        </h2>
+
+        <div class="space-y-4 text-sm">
+
+          <div class="flex justify-between text-gray-500">
+            <span>Subtotal</span>
+            <span>₹{{ getTotal() }}</span>
+          </div>
+
+          <div class="flex justify-between text-gray-500">
+            <span>Shipping</span>
+            <span class="text-green-600 font-medium">Free</span>
+          </div>
+
+          <hr>
+
+          <div class="flex justify-between text-lg font-bold text-gray-900">
+            <span>Total</span>
+            <span>₹{{ getTotal() }}</span>
+          </div>
+
+        </div>
+
+        <!-- Buttons -->
+        <div class="mt-6 space-y-3">
+
+          <button
+             routerLink="/checkout"
+             class="w-full bg-black text-white py-3 rounded-xl font-semibold hover:opacity-90 transition">
+               Proceed to Checkout
+          </button>
+
+          <button
+            (click)="clearCart()"
+            class="w-full border py-3 rounded-xl font-semibold hover:bg-gray-50 transition"
+          >
+            Clear Cart
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

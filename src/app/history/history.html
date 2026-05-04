@@ -1,0 +1,137 @@
+<div class="min-h-screen bg-[#FAFAFA] py-10 px-6">
+  <div class="max-w-5xl mx-auto">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-10">
+      <div>
+        <h1 class="text-4xl font-black text-slate-900 tracking-tight">
+          Order History
+        </h1>
+        <p class="text-slate-500 text-sm mt-1">
+          Review all your past purchases
+        </p>
+      </div>
+
+      <div class="flex gap-3">
+        <!-- Clear History -->
+        <button 
+          (click)="clearHistory()"
+          class="px-4 py-2 bg-red-50 text-red-500 rounded-xl text-sm font-bold hover:bg-red-100 transition">
+          Clear
+        </button>
+
+        <!-- Back -->
+        <button 
+          routerLink="/home"
+          class="px-6 py-2 bg-white border border-slate-200 rounded-xl font-semibold hover:shadow-sm transition">
+          Back
+        </button>
+      </div>
+    </div>
+
+    <!-- Orders List -->
+    <div class="space-y-6">
+
+      <!-- Order Card -->
+      <div *ngFor="let order of orders" 
+           class="group bg-white border border-slate-200 rounded-[2rem] p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all">
+
+        <!-- Top Row -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+
+          <div>
+            <p class="text-sm text-slate-400 font-medium">Order ID</p>
+            <p class="font-bold text-slate-900">{{ order.id }}</p>
+          </div>
+
+          <div>
+            <p class="text-sm text-slate-400 font-medium">Date</p>
+            <p class="font-bold text-slate-900">{{ order.date }}</p>
+          </div>
+
+          <div>
+            <p class="text-sm text-slate-400 font-medium">Total</p>
+            <p class="font-bold text-slate-900">₹{{ order.total }}</p>
+          </div>
+
+          <!-- Status -->
+          <div>
+            <span 
+              [ngClass]="getStatusClass(order.status)"
+              class="px-4 py-1 rounded-full text-xs font-bold">
+              {{ order.status }}
+            </span>
+          </div>
+
+        </div>
+
+        <!-- Product List -->
+        <div class="space-y-4">
+
+          <div *ngFor="let item of order.items" 
+               class="flex items-center gap-4 p-4 rounded-xl border border-slate-100 hover:bg-slate-50 transition">
+
+            <!-- Image (FIXED fallback support) -->
+            <img 
+              [src]="item.thumbnail || item.image || 'https://via.placeholder.com/150'"
+              class="w-16 h-16 rounded-xl object-cover border" />
+
+            <div class="flex-1">
+              <h4 class="font-bold text-slate-900">
+                {{ item.title || item.name }}
+              </h4>
+              <p class="text-sm text-slate-500">
+                Qty: {{ item.quantity }}
+              </p>
+            </div>
+
+            <div class="font-bold text-slate-900">
+              ₹{{ item.price }}
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Actions -->
+        <div class="flex justify-between items-center mt-6">
+
+          <button 
+            (click)="reorder(order)"
+            class="px-5 py-2 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-slate-800 transition active:scale-95">
+            Reorder
+          </button>
+
+          <span class="text-xs text-slate-400">
+            {{ order.items.length }} item(s)
+          </span>
+
+        </div>
+
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="orders.length === 0" 
+           class="text-center py-24 bg-white rounded-[2rem] border border-slate-200">
+
+        <div class="text-6xl mb-6">🛍️</div>
+
+        <h3 class="text-2xl font-black text-slate-900 mb-2">
+          No Orders Yet
+        </h3>
+
+        <p class="text-slate-500 mb-6 max-w-md mx-auto">
+          Looks like you haven’t placed any orders. Start exploring and grab something amazing!
+        </p>
+
+        <button 
+          routerLink="/home"
+          class="px-8 py-3 bg-slate-900 text-white rounded-xl font-bold hover:bg-slate-800 transition active:scale-95">
+          Start Shopping
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+</div>

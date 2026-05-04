@@ -1,0 +1,135 @@
+<nav [class.shadow-lg]="scrolled"
+     class="sticky top-0 z-50 backdrop-blur-xl bg-white/70 border-b border-slate-200/60 transition-all duration-300">
+
+  <div class="relative max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+
+    <!-- LEFT: LOGO -->
+    <div class="flex items-center">
+      <a routerLink="/"
+         class="group flex items-center gap-3 active:scale-95 transition">
+
+        <div class="relative w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white shadow-md">
+          <span class="text-lg font-extrabold">C</span>
+        </div>
+
+        <span class="text-lg font-extrabold tracking-tight text-slate-900">
+          Cartify<span class="text-indigo-600">.</span>
+        </span>
+      </a>
+    </div>
+
+
+    <!-- CENTER NAV -->
+    <div class="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-2 bg-white/60 backdrop-blur-md px-2 py-1 rounded-full border border-slate-200 shadow-sm">
+
+      <a *ngFor="let link of ['Home', 'Products', 'Services', 'About']"
+         [routerLink]="link === 'Home' ? '/' : '/' + link.toLowerCase().replace(' ', '-')"
+         routerLinkActive="bg-slate-900 text-white shadow-sm"
+         class="px-5 py-2 text-[12px] uppercase tracking-wide font-semibold text-slate-500 rounded-full transition-all duration-200 hover:text-slate-900 hover:bg-white">
+
+        {{ link }}
+      </a>
+
+    </div>
+
+
+    <!-- RIGHT ACTIONS -->
+    <div class="flex items-center gap-2">
+
+      <!-- CART -->
+      <a routerLink="/cart"
+         class="relative p-2.5 text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-full transition">
+
+        <svg class="w-5 h-5"
+             fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
+          <path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
+        <span *ngIf="cartCount > 0"
+              class="absolute top-1 right-1 bg-indigo-600 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">
+          {{ cartCount }}
+        </span>
+      </a>
+
+      <div class="h-5 w-px bg-slate-200 mx-2 hidden sm:block"></div>
+
+
+      <!-- AUTH -->
+      <div *ngIf="!user" class="hidden sm:flex items-center gap-2">
+
+        <a routerLink="/login"
+           class="px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition">
+          Log in
+        </a>
+
+        <a routerLink="/register"
+           class="px-5 py-2 text-sm font-semibold bg-slate-900 text-white rounded-full hover:bg-indigo-600 transition shadow-sm">
+          Get Started
+        </a>
+
+      </div>
+
+
+      <!-- USER -->
+      <div *ngIf="user" class="relative ml-2">
+
+        <button (click)="toggleMenu()"
+                class="flex items-center gap-2 p-1.5 bg-white border border-slate-200 rounded-full hover:border-slate-300 transition">
+
+          <div class="w-8 h-8 rounded-full bg-slate-900 flex items-center justify-center text-white text-xs font-bold">
+            {{ user.firstName[0] }}{{ user.lastName ? user.lastName[0] : '' }}
+          </div>
+
+          <svg class="w-4 h-4 text-slate-400"
+               fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <!-- DROPDOWN -->
+        <div *ngIf="isMenuOpen"
+             class="absolute right-0 mt-3 w-60 bg-white border border-slate-200 rounded-xl shadow-lg py-2">
+
+          <div class="px-4 py-2 border-b border-slate-100">
+            <p class="text-xs text-slate-400">Signed in as</p>
+            <p class="text-sm font-semibold text-slate-900 truncate">
+              {{ user.firstName }} {{ user.lastName }}
+            </p>
+          </div>
+
+          <a routerLink="/profile"
+             class="block px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition">
+            My Account
+          </a>
+
+          <button (click)="logout()"
+                  class="w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-50 transition">
+            Sign out
+          </button>
+
+        </div>
+      </div>
+
+
+      <!-- MOBILE -->
+      <button class="lg:hidden p-2.5 text-slate-700 bg-slate-100 rounded-full ml-2"
+              (click)="toggleMenu()">
+
+        <svg *ngIf="!isMenuOpen"
+             class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M4 8h16M4 16h16" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+
+        <svg *ngIf="isMenuOpen"
+             class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M6 18L18 6M6 6l12 12" stroke-width="2"/>
+        </svg>
+
+      </button>
+
+    </div>
+
+  </div>
+</nav>
